@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Button, Form, Container, Row, Col } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom'; // To handle page navigation
+import { useNavigate } from 'react-router-dom';
+import { validateEmail, validatePassword } from "../../utils/validation";
+ // To handle page navigation
 
 const Signup = () => {
   const [email, setEmail] = useState('');
@@ -24,10 +26,19 @@ const Signup = () => {
   };
 
   // Handle form submission
-  const handleSignupSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
-    setSuccessMessage('');
+    const response = await fetch("http://localhost:8080/signup", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams(formData), // Converts object to form-encoded string
+    });
+    const result = await response.json();
+    console.log(result);
+
+
 
     // Form validation
     if (!validateEmail(email)) {

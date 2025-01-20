@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Button, Form, Container, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { validateEmail, validatePassword } from "../../utils/validation";
+
 
 const Login = ({ setIsAuthenticated }) => {
   const [email, setEmail] = useState('');
@@ -10,10 +12,19 @@ const Login = ({ setIsAuthenticated }) => {
 
   const navigate = useNavigate();
 
-  const handleLoginSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
-    setLoading(true);
+    const response = await fetch("http://localhost:8080/signup", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams(formData), // Converts object to form-encoded string
+    });
+    const result = await response.json();
+    console.log(result);
+
+
 
     if (!email || !password) {
       setLoading(false);
@@ -75,3 +86,4 @@ const Login = ({ setIsAuthenticated }) => {
 };
 
 export default Login;
+ag

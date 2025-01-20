@@ -11,5 +11,14 @@
         <groupId>mysql</groupId>
     <artifactId>mysql-connector-java</artifactId>
     <version>8.0.34</version>
+    <groupId>javax.servlet</groupId>
+     <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <version>4.0.1</version> <!-- Use version matching your servlet container -->
+        <scope>provided</scope>
+
+    <artifactId>javax.servlet-api</artifactId>
+
+    <version>4.0.1</version>
     </dependency>
 </project>
